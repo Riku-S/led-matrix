@@ -1,0 +1,253 @@
+<style>
+body{
+	font-family: Arial;
+	background-color: #202428;
+	color: #f0f0f0;
+}
+
+a {
+	color: #f0f0f0;
+}
+
+code {
+	background-color: darkblue
+	display: block;
+	white-space: pre-wrap;
+}
+
+label {
+	margin: 10px;
+	display: block;
+}
+
+div {
+	padding: 10px;
+}
+</style>
+
+<body onload="initFunction()">
+	<button onclick="setLanguage('English')">in English</button>, <button onclick="setLanguage('Finnish')">Suomeksi</button>
+	<h1>PYNQ emulator</h1>
+	<label lang="English">
+		<h2>Contents:</h2>
+		<div>
+			0. What is PYNQ emulator<br>
+			1. How to use<br>
+			1.1 Get Started<br>
+			1.2 Commands you may need<br>
+			2. Known problems<br>
+			3. Example code<br>
+		</div>
+	</label>
+	<label lang="Finnish">
+		<h2>Sisällöt:</h2>
+		<div>
+			0. Mikä on PYNQ-emulaattori<br>
+			1. Käyttöohje<br>
+			1.1 Aloitus<br>
+			1.2 Komentoja joita voit tarvita<br>
+			2. Tunnetut ongelmat<br>
+			3. Esimerkkikoodi<br>
+		</div>
+	</label>
+	<label lang="English">
+		<h2>0. What is PYNQ emulator</h2>
+		<div>
+			The PYNQ emulator is a Python library programmed with tkinter.
+			The emulator was made to simulate the functionalities of the original PYNQ device
+			and the Python library that TUNI uses to program on the devices.<br>
+		</div>
+		
+	</label>
+	<label lang="Finnish">
+		<h2>0. Mikä on PYNQ-emulaattori</h2>
+		<div>
+			PYNQ-emulaattori onPython-kirjasto, joka on ohjelmoitu tkinter-kirjoston avulla.
+			Emulaattori on tehty simuloimaan oikean PYNQ-laitteen toimintoja, ja siihen liittyvää,
+			TUNI:n käyttämää Python-kirjastoa, jolla laitteille pystyy ohjelmoimaan.<br>
+		</div>
+		
+	</label>
+	
+	<label lang="English">
+		<h2>1. How to use</h2>
+		<h3>1.1 Get started:</h3>
+		<div>
+			Download the library from <a href="https://github.com/Riku-S/led-matrix-emulator">https://github.com/Riku-S/led-matrix-emulator</a><br>
+			Make sure you have the <i>emulator</i> folder with <i>arduino_led_matrix_emulator.py</i> in the same folder as the Python file you're
+			writing your emulation to. <b>To make sure PyCharm actually finds the library, open your whole project directory from <code>File</code>/<code>Open</code>.</b><br>
+			Import the contents with command <code>from pynq_emulator.arduino_led_matrix_emulator import *</code>, but remember that in the final product
+			with an actual hardware, the import commands you may use are 
+			<code>import tut.arduino_led_matrix as led_matrix</code>,
+			<code>from pynq.lib import Button</code> and
+			<code>from pynq.lib import Switch</code> <br>
+			You can write your own code as you would write it for PYNQ, or modify <i>example.py</i> to get started. Run your code to see if everything works. Close the simulation from your coding IDE rather than by closing the window.
+		</div>
+		<h3>1.2 Commands and variables you may need:</h3>
+		<div>
+			<code>led_matrix.clear()</code> Set all the LEDs dark.<br>
+			<code>led_matrix.init()</code> Always start your simulation with this!<br>
+			<code>led_matrix.read_sensor()</code> Read the light sensor's value. In the simulation you can adjust it between 0 and 20000.<br>
+			<code>led_matrix.set_led_color(x: int, y: int, red: int, green: int, blue: int)</code> Set a light level for the red, green and blue LED lights in the coordinates (x, y). The colors may have values between 0 and 255.<br>
+			<br>
+			<code>Button(id: int)</code> Returns the button with the given index.<br>
+			<code>Button.read()</code> Returns the state of the button, 0 or 1<br>
+			<code>Button.wait_for_value(value: int)</code> Don't do anything before the button gets the value 0 or 1<br>
+			<br>
+			<code>Switch(id: int)</code> Returns the switch with the given index.<br>
+			<code>Switch.read()</code> Returns the state of the switch, 0 or 1<br>
+			<code>Switch.wait_for_value(value: int)</code> Don't do anything before the switch gets the value 0 or 1<br>
+		</div>
+	</label>
+	
+	<label lang="Finnish">
+		<div>
+			<h2>1. Käyttöohje</h2>
+			<h3>1.1 Aloitus:</h3>
+			Lataa kirjasto osoittesta <a href="https://github.com/Riku-S/led-matrix-emulator">https://github.com/Riku-S/led-matrix-emulator</a><br>
+			Varmista, että <i>emulator</i>-kansio, jossa on myös <i>arduino_led_matrix_emulator.py</i> on siinä kansiossa, jossa haluat muokata simuloitavaa Python-tiedostoa.
+			<b>Varmistaaksesi että PyCharm todellakin lötää kirjaston, avaa koko projektikansio PyCharmissa polkua <code>File</code>/<code>Open</code>.</b><br>
+			Importtaa kirjasto komennolla <code>from pynq_emulator.arduino_led_matrix_emulator import *</code>, mutta muista, että lopullisessa tuotteesssa
+			oikealla laitteella, import-komentoihin kuuluu 
+			<code>import tut.arduino_led_matrix as led_matrix</code>,
+			<code>from pynq.lib import Button</code> ja 
+			<code>from pynq.lib import Switch</code> <br>
+			Voit kirjoittaa koodia niinkuin kirjoittaisit sitä PYNQ:ille, tai muokata <i>example.py</i> -esimerkkiä päästäksesi alkuun. Aja koodisi nähdäksesi, että kaikki toimii. Sulje simulaatio mieluiten PyCharmin punaisesta neliöstä.
+		</div>
+		<h3>1.2 Komentoja joita voit tarvita:</h3>
+		<div>
+			<code>led_matrix.clear()</code> Pimennä kaikki ledit.<br>
+			<code>led_matrix.init()</code> Aloita simulaatio aina tällä komennolla!<br>
+			<code>led_matrix.read_sensor()</code> Lue valosensorin arvo. Simulaatiossa voi säädellä sitä 0-20000 välillä.<br>
+			<code>led_matrix.set_led_color(x: int, y: int, punainen: int, vihreä: int, sininen: int)</code> Aseta punaisen, vihreän ja sinisen valon määrä koordinaatteihin (x, y). Värien arvot tulee asettaa välille 0 ja 255.<br>
+			<br>
+			<code>Button(id: int)</code> Palauttaa kyseisen numeroisen napin.<br>
+			<code>Button.read()</code> Palauttaa napin tilan, 0 tai 1<br>
+			<code>Button.wait_for_value(arvo: int)</code> Älä tee mitään ennen kuin nappi saa arvon 0 tai 1<br>
+			<br>
+			<code>Switch(id: int)</code> Palauttaa kyseisen numeroisen vivun.<br>
+			<code>Switch.read()</code> Palauttaa vivun tilan, 0 tai 1<br>
+			<code>Switch.wait_for_value(arvo: int)</code> Älä tee mitään ennen kuin vipu saa arvon 0 tai 1<br>
+		</div>
+	</label>
+	
+	<label lang="English">
+		<h2>2. Known problems</h2>
+		<div>
+			Repeated <code>.read()</code> and <code>.wait_for_value()</code> functions aren't necessarily the most accurate possible. For example, writing <br>
+			<code>
+if (my_button.read(1):<br>
+	my_button.wait_for_value(0)<br></code> may soft lock the hardware PYNQ while it behaves in a more predictable way in the simulation.<br>
+			<br>
+			As long as I keep using tkinter, threading will break the drawing functions very easily.<br>
+			<br>
+			Other inaccuracies may be found later and hopefully be fixed as soon as possible. Remember this isn't tested very much. If you notice something wrong yourself, or want to give feedback of any kind, please feel free to inform Riku in some way about it. He will answer to email in riku.salminen@tuni.fi or Telegram.
+		</div>
+	</label>
+		<label lang="Finnish">
+		<h2>2. Tunnetut ongelmat</h2>
+		<div>
+			Peräkkäiset <code>.read()</code> and <code>.wait_for_value()</code> funktiot eivät ole välttämättä tarkimpia mahdollisia. Esimerkiksi<br>
+			<code>
+if (my_button.read(1):<br>
+	my_button.wait_for_value(0)<br></code> voi saada PYNQ:in jumiin, vaikka simulaatio käyttäytyisi arvattavammin.<br>
+			<br>
+			Niin kauan kun käytän tkinteriä, threading tuhoaa piirtofunktiot.<br>
+			<br>
+			Muita eroavaisuuksia saattaa löytyä myöhemmin ja toivottavasti tulee korjatuksi mahdollisimman nopeasti. Jos huomaat jonkin olevan pielessä, tai haluat muuten vain antaa palautetta, Riku mielellään ottaa palautetta vastaan. Hän vastaa sähköpostiin riku.salminen@tuni.fi tai Telegramissa.
+		</div>
+	</label>
+	
+	<label lang="Any">
+		<h2>3. example.py</h2>
+		<code># PYNQ led matrix simulator example
+
+# Remember not to import this in your final product
+from pynq_emulator.arduino_led_matrix_emulator import *
+
+# These could be imported instead
+# import tut.arduino_led_matrix as led_matrix
+# from pynq.lib import Button
+# from pynq.lib import Switch
+
+import time
+
+
+def turn(x_dir, y_dir):
+    """ Turn -90 degrees
+
+    :param x_dir: x direction
+    :param y_dir: y direction
+    :return: new x dirction, new y direction
+    """
+
+    new_x_dir = -y_dir
+    new_y_dir = x_dir
+    return new_x_dir, new_y_dir
+
+
+
+def main():
+    # Always remember to initialize the led matrix!
+    led_matrix.init()
+
+    # Let's paint the whole matrix yellow with a red dot moving in a spiral
+    x = 0           # x coordinate of the painter
+    y = 0           # y coordinate of the painter
+    x_dir = 1       # how fast the painter goes right
+    y_dir = 0       # how fast the painter goes down
+
+    # Let's initialize a 2 dimensional array of leds painted
+    led_painted_list = [[False for i in range(8)] for j in range(8)]
+
+    leds_painted = 0
+    while leds_painted < 64:        # 8 * 8 LEDs = 64 LEDs
+        # We first paint our dot red
+        led_matrix.set_led_color(x, y, 255, 0, 0)
+
+        time.sleep(0.1)
+
+        #Then yellow
+        led_matrix.set_led_color(x, y, 255, 255, 0)
+
+        # Remember this led later
+        led_painted_list[x][y] = 1
+        leds_painted += 1
+
+        # The next led is painted already / doesn't exist
+        if (not 0 <= x + x_dir <= 7 or not 0 <= y + y_dir <= 7 or
+                led_painted_list[x + x_dir][y + y_dir] == 1):
+            x_dir, y_dir = turn(x_dir, y_dir)
+        
+        # Change the coordinates
+        x += x_dir
+        y += y_dir
+
+    # Ending the simulation doesn't shut down the LEDS in real life
+    led_matrix.clear()
+
+
+main()
+</code>
+	</label>
+	
+</body>
+
+<script>
+function setLanguage(language) {
+	var list = document.getElementsByTagName("LABEL");
+	for(var i = 0; i < list.length; i++){
+		var entry = list[i];
+		if(entry.lang == language || entry.lang=="Any")
+			entry.style.display = "block";
+		else
+			entry.style.display = "none";
+	}
+}
+
+function initFunction() {
+	setLanguage("Finnish");
+	var body = document.getElementsByTagName("body")[0];
+	body.style.display = "block";
+}
+</script>
