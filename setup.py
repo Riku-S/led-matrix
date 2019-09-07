@@ -18,9 +18,10 @@ setuptools.setup(
     download_url="https://github.com/Riku-S/led-matrix/archive/master.zip",
     install_requires=requires,
     classifiers = [
+                  'Programming Language :: Python :: 2.7',
                   'Programming Language :: Python :: 3',
                   'Programming Language :: Python :: 3.6',
                   'Programming Language :: Python :: 3.7',
               ],
-    python_requires='>=3.6',
+    python_requires='>=2.7',
 )
