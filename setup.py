@@ -14,4 +14,10 @@ setup(
     scripts=[],
     url="https://github.com/Riku-S/led-matrix",
     download_url="https://github.com/Riku-S/led-matrix/archive/master.zip"
+	
+	classifiers=[
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+    ],
 )
