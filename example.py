@@ -24,7 +24,6 @@ def turn(x_dir, y_dir):
     return new_x_dir, new_y_dir
 
 
-
 def main():
     # Always remember to initialize the led matrix!
     led_matrix.init()
@@ -45,23 +44,23 @@ def main():
 
         time.sleep(0.1)
 
-        #Then yellow
+        # Then yellow
         led_matrix.set_led_color(x, y, 255, 255, 0)
 
         # Remember this led later
-        led_painted_list[x][y] = 1
+        led_painted_list[x][y] = True
         leds_painted += 1
 
         # The next led is painted already / doesn't exist
-        if (not 0 <= x + x_dir <= 7 or not 0 <= y + y_dir <= 7 or
-                led_painted_list[x + x_dir][y + y_dir] == 1):
+        if (not (0 <= x + x_dir <= 7 and 0 <= y + y_dir <= 7) or
+                led_painted_list[x + x_dir][y + y_dir]):
             x_dir, y_dir = turn(x_dir, y_dir)
 
         # Change the coordinates
         x += x_dir
         y += y_dir
 
-    # Ending the simulation doesn't shut down the LEDS in real life
+    # Ending the simulation doesn't shut down the LEDs in real life
     led_matrix.clear()
 
 

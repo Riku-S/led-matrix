@@ -27,9 +27,6 @@ import time
 # or tell him about all the ways to cause errors in the TiTe guild room
 #
 
-# Maybe import threading later
-THREADING = False
-
 #
 # End of the area where the simulation should be written.
 # The rest of the code makes the simulation possible
@@ -223,56 +220,75 @@ class SimulatorWindow:
             return self.switches_activated[index].get()
 
     def refresh(self):
-        if not THREADING:
-            """ Refreshes the simulation. Doesn't exist in the real PYNQ and
-            shouldn't be used by anyone."""
-            self.root.update()
-            self.canvas.update()
-            self.button_canvas.update()
-            self.switch_canvas.update()
+        """ Refreshes the simulation. Doesn't exist in the real PYNQ and
+        shouldn't be used by anyone."""
+        self.root.update()
+        self.canvas.update()
+        self.button_canvas.update()
+        self.switch_canvas.update()
 
 
 def end_simulation():
     if not simulator_window.ended:
-        print("THE SIMULATION HAS ENDED. Everything from this point on "
-              "wouldn't happen in reality.")
+        print("THE SIMULATION HAS ENDED.")
         simulator_window.ended = True
+        quit()
 
 
+# Should not be referred to by external files
 simulator_window = SimulatorWindow()
 
 
 # The Button
 class Button:
     def __init__(self, index: int):
-        self.index = index
+        if 0 <= index < NUM_BUTTONS:
+            self.index = index
+        else:
+            raise ValueError("""Invalid button ID %i, 
+            Please select an ID between 0 and %i""" % (index, NUM_BUTTONS - 1))
 
     def read(self):
         return simulator_window.read_button(self.index)
 
     def wait_for_value(self, value: int):
-        while True:
-            if self.read() == value:
-                break
-            else:
-                time.sleep(1 / WAIT_FPS)
-                simulator_window.refresh()
+        if value == 0 or value == 1:
+            while True:
+                if self.read() == value:
+                    break
+                else:
+                    time.sleep(1 / WAIT_FPS)
+                    simulator_window.refresh()
+        else:
+            raise ValueError("""The button can't reach value %i. The accepted
+            values are 0 and 1""" % value)
 
 
+# The switch
 class Switch:
+
     def __init__(self, index: int):
-        self.index = index
+        if 0 <= index < NUM_BUTTONS:
+            self.index = index
+        else:
+            raise ValueError("""Invalid switch ID %i. 
+            Please select an ID between 0 and %i"""
+                             % (index, NUM_SWITCHES - 1))
 
     def read(self):
         return simulator_window.read_switch(self.index)
 
     def wait_for_value(self, value: int):
-        while True:
-            if self.read() == value:
-                break
-            else:
-                time.sleep(1 / WAIT_FPS)
-                simulator_window.refresh()
+        if value == 0 or value == 1:
+            while True:
+                if self.read() == value:
+                    break
+                else:
+                    time.sleep(1 / WAIT_FPS)
+                    simulator_window.refresh()
+        else:
+            raise ValueError("""The switch can't reach value %i. The accepted
+                        values are 0 and 1""" % value)
 
 
 class LedMatrix:
@@ -293,26 +309,30 @@ class LedMatrix:
         :return: None
         """
         rgb = [r, g, b]
+        # We can't let the user light up LEDs that don't exist
+        if not (0 <= x < MATRIX_WIDTH and 0 <= y < MATRIX_HEIGHT):
+            raise ValueError("""Invalid coordinates: x = %i, y = %i. 
+            Please give coordinates between 0 <= x <= %i and 0 <= y <= %i"""
+                             % (x, y, MATRIX_WIDTH - 1, MATRIX_HEIGHT - 1))
 
-        if 0 <= x < MATRIX_WIDTH and 0 <= y < MATRIX_HEIGHT:
+        # We can't give invalid color values for the LEDs
+        elif not (0 <= r <= 255 and 0 <= g <= 255 and 0 <= b <= 255):
+            raise ValueError("""Invalid color values: r=%i, g=%i, b=%i. 
+            Please give color values between %i and %i"""
+                             % (r, g, b, MIN_COLOR, MAX_COLOR))
+        else:
             for i in range(3):
                 self.matrix[x][y][i] = max(MIN_COLOR,
                                            min(MAX_COLOR, rgb[i]))
-            if not THREADING:
-                led_color = self.matrix[x][y]
-                r = led_color[0]
-                g = led_color[1]
-                b = led_color[2]
-                # This is where we change the color of the led!
-                simulator_window.canvas.itemconfig(
-                    simulator_window.grid_leds[x][y],
-                    fill="#%02x%02x%02x" % (r, g, b))
-                simulator_window.canvas.update()
-        else:
-            print("""Error: invalid coordinates given, x=%i, y=%i. Please
-                  give coordinates between 0 <= x < %i and 0 <= 0 < %i"""
-                  % (x, y, MATRIX_WIDTH, MATRIX_HEIGHT))
-            end_simulation()
+            led_color = self.matrix[x][y]
+            r = led_color[0]
+            g = led_color[1]
+            b = led_color[2]
+            # This is where we change the color of the led!
+            simulator_window.canvas.itemconfig(
+                simulator_window.grid_leds[x][y],
+                fill="#%02x%02x%02x" % (r, g, b))
+            simulator_window.canvas.update()
 
     def clear(self):
         """ Clear the led matrix, make all the leds black"""
@@ -320,35 +340,20 @@ class LedMatrix:
         for i in range(MATRIX_WIDTH):
             for j in range(MATRIX_HEIGHT):
                 self.matrix[i][j] = [0, 0, 0]
-                if not THREADING:
-                    simulator_window.canvas.itemconfig(
-                        simulator_window.grid_leds[i][j],
-                        fill="#%02x%02x%02x" % (0, 0, 0))
-                    simulator_window.canvas.update()
-
-    def read_sensor(self, index=0):
-        """ Read the light sensor. In led matrix class due to reasons"""
-        simulator_window.slider_canvas.update()
-        if 0 <= index < NUM_SWITCHES:
-            return simulator_window.sliders[index].get()
-
-    def init(self):
-        """ Does basically nothing in the emulation, butimportant in
-        the real device"""
-        print("Simulation Initialized")
-
-    def update_colors(self):
-        """Doesn't exist in real PYNQ, should be used only by the
-        emulator's own functions!"""
-        for i in range(MATRIX_WIDTH):
-            for j in range(MATRIX_HEIGHT):
-                r = self.matrix[i][j][0]
-                g = self.matrix[i][j][1]
-                b = self.matrix[i][j][2]
                 simulator_window.canvas.itemconfig(
                     simulator_window.grid_leds[i][j],
-                    fill="#%02x%02x%02x" % (r, g, b))
+                    fill="#%02x%02x%02x" % (0, 0, 0))
                 simulator_window.canvas.update()
+
+    def read_sensor(self):
+        """ Read the light sensor. In led matrix class due to reasons"""
+        simulator_window.slider_canvas.update()
+        return simulator_window.sliders[0].get()
+
+    def init(self):
+        """ Does basically nothing in the emulation, but important in
+        the real device"""
+        print("Led matrix initialized")
 
 
 led_matrix = LedMatrix()

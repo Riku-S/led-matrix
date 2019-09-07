@@ -139,9 +139,9 @@ div {
 if (my_button.read(1):<br>
 	my_button.wait_for_value(0)<br></code> may soft lock the hardware PYNQ while it behaves in a more predictable way in the simulation.<br>
 			<br>
-			As long as I keep using tkinter, threading will break the drawing functions very easily.<br>
+			As long as I keep using tkinter, threading won't work due to breaking the drawing functions.<br>
 			<br>
-			Other inaccuracies may be found later and hopefully be fixed as soon as possible. Remember this isn't tested very much. If you notice something wrong yourself, or want to give feedback of any kind, please feel free to inform Riku in some way about it. He will answer to email in riku.salminen@tuni.fi or Telegram.
+			Keep in mind that the testing process has been very shorthanded, since the programmer of the emulator doesn't own a PYNQ. Some features are made after the descriptions in the exercises, and details have been guessed. For example, an earlier version of the emulator let you try to light up LEDs that wouldn't exist and continue the simulation, while the real PYNQ would have stopped immediately. It's very probable that there are still some such inaccuracies. If you notice something wrong yourself, or want to give feedback of any kind, please feel free to inform Riku in some way about it. He will at read email at riku.salminen@tuni.fi.
 		</div>
 	</label>
 		<label lang="Finnish">
@@ -154,7 +154,7 @@ if (my_button.read(1):<br>
 			<br>
 			Niin kauan kun käytän tkinteriä, threading tuhoaa piirtofunktiot.<br>
 			<br>
-			Muita eroavaisuuksia saattaa löytyä myöhemmin ja toivottavasti tulee korjatuksi mahdollisimman nopeasti. Jos huomaat jonkin olevan pielessä, tai haluat muuten vain antaa palautetta, Riku mielellään ottaa palautetta vastaan. Hän vastaa sähköpostiin riku.salminen@tuni.fi tai Telegramissa.
+			Pidä mielessä, että ohjelman testaaminen on ollut erittäin vajaata, sillä emulaattorin ohjelmoija ei omista PYNQ:iä. Jotkin ominaisuudet on tehty tehtävänantojen antamien kuvauksien perusteella, ja yksityiskohtia on arvattu. Esimerkiksi aiempi versio antoi käyttäjän yrittää sytyttää ledejä matriisin ulkopuolelta lopettamatta simulaatiota, kun taas oikea PYNQ olisi heti lopettanut. Todennäköisesti vastaavia eroavaisuuksia oikeaan laitteeseen on vielä jäljellä. Jos huomaat jotain olevan pielessä, tai haluat muuten vain antaa palautetta, Riku mielellään ottaa palautetta vastaan. Lähetä viestiä osoitteeseen riku.salminen@tuni.fi.
 		</div>
 	</label>
 	
@@ -186,7 +186,6 @@ def turn(x_dir, y_dir):
     return new_x_dir, new_y_dir
 
 
-
 def main():
     # Always remember to initialize the led matrix!
     led_matrix.init()
@@ -207,27 +206,28 @@ def main():
 
         time.sleep(0.1)
 
-        #Then yellow
+        # Then yellow
         led_matrix.set_led_color(x, y, 255, 255, 0)
 
         # Remember this led later
-        led_painted_list[x][y] = 1
+        led_painted_list[x][y] = True
         leds_painted += 1
 
         # The next led is painted already / doesn't exist
-        if (not 0 <= x + x_dir <= 7 or not 0 <= y + y_dir <= 7 or
-                led_painted_list[x + x_dir][y + y_dir] == 1):
+        if (not (0 <= x + x_dir <= 7 and 0 <= y + y_dir <= 7) or
+                led_painted_list[x + x_dir][y + y_dir]):
             x_dir, y_dir = turn(x_dir, y_dir)
-        
+
         # Change the coordinates
         x += x_dir
         y += y_dir
 
-    # Ending the simulation doesn't shut down the LEDS in real life
+    # Ending the simulation doesn't shut down the LEDs in real life
     led_matrix.clear()
 
 
 main()
+
 </code>
 	</label>
 	
