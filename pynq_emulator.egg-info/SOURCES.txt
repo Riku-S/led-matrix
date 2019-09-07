@@ -1,9 +1,0 @@
-README.md
-setup.cfg
-setup.py
-pynq_emulator/__init__.py
-pynq_emulator/pynq_emulation_library.py
-pynq_emulator.egg-info/PKG-INFO
-pynq_emulator.egg-info/SOURCES.txt
-pynq_emulator.egg-info/dependency_links.txt
-pynq_emulator.egg-info/top_level.txt
