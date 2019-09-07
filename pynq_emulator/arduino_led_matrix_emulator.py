@@ -43,6 +43,8 @@ NUM_SWITCHES = 2
 SWITCH_CANVAS_WIDTH = (SWITCH_WIDTH * NUM_SWITCHES +
                        SWITCH_SPACING * (NUM_SWITCHES + 1))
 SWITCH_CANVAS_HEIGHT = SWITCH_HEIGHT + SWITCH_SPACING * 2
+BUTTON_UP_COLOR = "#f0f0f0"
+BUTTON_DOWN_COLOR = "#c8c8c8"
 
 # Constants for the sliders
 SLIDER_SPACING = 16
@@ -74,7 +76,7 @@ class SimulatorWindow:
 
     def __init__(self):
         # The main window
-        self.root = Tk(className=" Led matrix simulator")
+        self.root = Tk(className=" Led matrix emulator")
         self.root.geometry("%sx%s"
                            % (WINDOW_WIDTH, WINDOW_HEIGHT))
         self.root.configure(background=BG_COLOR)
@@ -88,8 +90,8 @@ class SimulatorWindow:
 
         # The widgets posing as leds
         self.grid_leds = [[self.canvas.create_oval(
-            i * LED_SIZE + 1, j * LED_SIZE + 1, (i + 1) * LED_SIZE - 1,
-            (j + 1) * LED_SIZE - 1,
+            i * LED_SIZE + 2, j * LED_SIZE + 2, (i + 1) * LED_SIZE - 2,
+            (j + 1) * LED_SIZE - 2,
             fill="#000000") for j in range(MATRIX_HEIGHT)]
             for i in range(MATRIX_WIDTH)]
 
@@ -112,7 +114,7 @@ class SimulatorWindow:
                 y,
                 (i + 1) * BUTTON_SPACING + (i + 1) * BUTTON_WIDTH,
                 BUTTON_SPACING + BUTTON_HEIGHT,
-                fill="#3060c0",
+                fill=BUTTON_UP_COLOR,
             )
             self.buttons.append(button)
             self.buttons_down.append(False)
@@ -120,8 +122,9 @@ class SimulatorWindow:
         for i in range(NUM_BUTTONS):
             x = (i + 1) * BUTTON_SPACING + (i + 0.5) * BUTTON_WIDTH
             y = BUTTON_SPACING + BUTTON_HEIGHT*0.5
-            self.button_canvas.create_text(x, y, text=i)
+            self.button_canvas.create_text(x, y, text="BTN%i" % i)
 
+        # When buttons are pressed/released, execute functions to handle it
         self.button_canvas.bind('<Button-1>', self.button_clicked)
         self.button_canvas.bind('<ButtonRelease-1>', self.button_released)
 
@@ -140,7 +143,7 @@ class SimulatorWindow:
             self.switches_activated.append(IntVar())
 
             switch = Checkbutton(self.switch_canvas,
-                                 text=i,
+                                 text="SW%i" % i,
                                  var=self.switches_activated[i])
             switch.place(x=(i + 1) * SWITCH_SPACING + i * SWITCH_WIDTH,
                          y=SWITCH_SPACING,
@@ -162,7 +165,7 @@ class SimulatorWindow:
                            from_=SLIDER_MIN,
                            to=SLIDER_MAX,
                            orient="horizontal",
-                           label="Slider %i:" % i)
+                           label="Sensor %i:" % i)
             slider.place(x=SLIDER_SPACING,
                          y=i*SLIDER_HEIGHT + (i+1)*SLIDER_SPACING,
                          width=SLIDER_WIDTH,
@@ -187,14 +190,14 @@ class SimulatorWindow:
             index = buttons_under_mouse[0]
             self.buttons_down[index - 1] = True
             self.button_canvas.itemconfig(index,
-                                          fill="#80A0ff")
+                                          fill=BUTTON_DOWN_COLOR)
             self.button_canvas.update()
 
     def button_released(self, event):
         for i in range(len(self.buttons_down)):
             self.buttons_down[i] = False
             self.button_canvas.itemconfig(i + 1,
-                                          fill="#3060c0")
+                                          fill=BUTTON_UP_COLOR)
             self.button_canvas.update()
 
     def read_button(self, index: int):
@@ -212,10 +215,9 @@ class SimulatorWindow:
     def refresh(self):
         """ Refreshes the simulation. Doesn't exist in the real PYNQ and
         shouldn't be used by anyone."""
+        simulator_window.check_exit_state()
+
         self.root.update()
-        self.canvas.update()
-        self.button_canvas.update()
-        self.switch_canvas.update()
 
     def check_exit_state(self):
         """ If the simulator window in closed, exit the simulation. """
@@ -250,8 +252,8 @@ class Button:
                 if self.read() == value:
                     break
                 else:
-                    time.sleep(1 / WAIT_FPS)
                     simulator_window.refresh()
+                    time.sleep(1 / WAIT_FPS)
         else:
             raise ValueError("""The button can't reach value %i. The accepted
             values are 0 and 1""" % value)
@@ -282,8 +284,8 @@ class Switch:
                 if self.read() == value:
                     break
                 else:
-                    time.sleep(1 / WAIT_FPS)
                     simulator_window.refresh()
+                    time.sleep(1 / WAIT_FPS)
         else:
             raise ValueError("""The switch can't reach value %i. The accepted
                         values are 0 and 1""" % value)
