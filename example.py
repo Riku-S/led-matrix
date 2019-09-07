@@ -11,54 +11,55 @@ from pynq_emulator.arduino_led_matrix_emulator import *
 import time
 
 
-def turn(x_dir, y_dir):
-    """ Turn -90 degrees
+def set_all_leds(red, green, blue):
+    """ Set the color value to all the LEDs
 
-    :param x_dir: x direction
-    :param y_dir: y direction
-    :return: new x dirction, new y direction
+    :param red: Red value between 0 and 255
+    :param green: Green value between 0 and 255
+    :param blue: Blue value between 0 and 255
+    :return: None
     """
-
-    new_x_dir = -y_dir
-    new_y_dir = x_dir
-    return new_x_dir, new_y_dir
+    for i in range(8):
+        for j in range(8):
+            led_matrix.set_led_color(i, j, red, green, blue)
 
 
 def main():
     # Always remember to initialize the led matrix!
     led_matrix.init()
 
-    # Let's paint the whole matrix yellow with a red dot moving in a spiral
-    x = 0           # x coordinate of the painter
-    y = 0           # y coordinate of the painter
-    x_dir = 1       # how fast the painter goes right
-    y_dir = 0       # how fast the painter goes down
+    button0 = Button(0)
+    switch0 = Switch(0)
 
-    # Let's initialize a 2 dimensional array of leds painted
-    led_painted_list = [[False for i in range(8)] for j in range(8)]
+    # Let's first set all LEDs red
 
-    leds_painted = 0
-    while leds_painted < 64:        # 8 * 8 LEDs = 64 LEDs
-        # We first paint our dot red
-        led_matrix.set_led_color(x, y, 255, 0, 0)
+    red = 0
+    green = 255
+    blue = 0
 
+    set_all_leds(red, green, blue)
+
+    # Advance to the next step when switch 0 is turned on
+    switch0.wait_for_value(1)
+
+    # From this point on the LEDs are red
+    red = 255
+    green = 0
+
+    # Stop the program by turning off the switch
+    while switch0.read() == 1:
+
+        # If button 1 is pressed, turn the LEDs magenta colored
+        # (full red + full blue)
+        if button0.read() == 1:
+            blue = 255
+        else:
+            blue = 0
+
+        set_all_leds(red, green, blue)
+
+        # Add a little delay between checks
         time.sleep(0.1)
-
-        # Then yellow
-        led_matrix.set_led_color(x, y, 255, 255, 0)
-
-        # Remember this led later
-        led_painted_list[x][y] = True
-        leds_painted += 1
-
-        # The next led is painted already / doesn't exist
-        if (not (0 <= x + x_dir <= 7 and 0 <= y + y_dir <= 7) or
-                led_painted_list[x + x_dir][y + y_dir]):
-            x_dir, y_dir = turn(x_dir, y_dir)
-
-        # Change the coordinates
-        x += x_dir
-        y += y_dir
 
     # Ending the simulation doesn't shut down the LEDs in real life
     led_matrix.clear()
