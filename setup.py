@@ -5,7 +5,7 @@ with open("README.md", 'r') as f:
 
 setup(
     name='pynq_emulator',
-    version='1.0',
+    version='1.1',
     author='Riku Salminen',
     author_email='riku.salminen@tuni.fi',
     description="An emulator for TUNI students' PYNQ exercises",
