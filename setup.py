@@ -17,7 +17,7 @@ setup(
     author_email='riku.salminen@tuni.fi',
     description="An emulator for TUNI students' PYNQ exercises",
 	long_description = long_description,
-    packages=find_packages(exclude=[])
+    packages=find_packages(exclude=[]),
     scripts=[],
     url="https://github.com/Riku-S/led-matrix",
     download_url="https://github.com/Riku-S/led-matrix/archive/master.tar.gz",
