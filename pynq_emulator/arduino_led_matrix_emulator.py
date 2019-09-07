@@ -76,7 +76,7 @@ class SimulatorWindow:
 
     def __init__(self):
         # The main window
-        self.root = Tk(className=" Led matrix emulator")
+        self.root = Tk(className=" Virtual led matrix")
         self.root.geometry("%sx%s"
                            % (WINDOW_WIDTH, WINDOW_HEIGHT))
         self.root.configure(background=BG_COLOR)
