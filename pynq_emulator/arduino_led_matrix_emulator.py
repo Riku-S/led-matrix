@@ -14,24 +14,6 @@ from tkinter import IntVar
 from tkinter import Scale
 import time
 
-#
-# IN CASE I SHARE THIS SIMULATOR TO OTHER STUDENTS...
-#
-# Write all your code in the following function to keep the simulation as
-# accurate as possible! Everything but imports should be written there, even
-# your custom functions
-#
-# If you use this in your own projects, or use this program anyway, Riku would
-# love to hear your feedback. To tell him how buggy and badly written the
-# program is, you can add him on Telegram, send email to riku.salminen@tuni.fi,
-# or tell him about all the ways to cause errors in the TiTe guild room
-#
-
-#
-# End of the area where the simulation should be written.
-# The rest of the code makes the simulation possible
-#
-
 
 GENERAL_SPACING = 16
 
@@ -92,7 +74,6 @@ class SimulatorWindow:
 
     def __init__(self):
         # The main window
-        self.ended = False
         self.root = Tk(className=" Led matrix simulator")
         self.root.geometry("%sx%s"
                            % (WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -189,6 +170,15 @@ class SimulatorWindow:
 
             self.sliders.append(slider)
 
+            self.closed = False
+            self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+
+    def on_closing(self):
+        print("Closing...")
+        self.closed = True
+        self.root.destroy()
+        # The next command will stop the simulation
+
     def button_clicked(self, event):
         buttons_under_mouse = self.button_canvas.find_overlapping(
             event.x, event.y, event.x, event.y
@@ -227,12 +217,10 @@ class SimulatorWindow:
         self.button_canvas.update()
         self.switch_canvas.update()
 
-
-def end_simulation():
-    if not simulator_window.ended:
-        print("THE SIMULATION HAS ENDED.")
-        simulator_window.ended = True
-        quit()
+    def check_exit_state(self):
+        """ If the simulator window in closed, exit the simulation. """
+        if self.closed:
+            exit()
 
 
 # Should not be referred to by external files
@@ -249,11 +237,16 @@ class Button:
             Please select an ID between 0 and %i""" % (index, NUM_BUTTONS - 1))
 
     def read(self):
+
+        simulator_window.check_exit_state()
         return simulator_window.read_button(self.index)
 
     def wait_for_value(self, value: int):
         if value == 0 or value == 1:
             while True:
+
+                simulator_window.check_exit_state()
+
                 if self.read() == value:
                     break
                 else:
@@ -276,11 +269,16 @@ class Switch:
                              % (index, NUM_SWITCHES - 1))
 
     def read(self):
+
+        simulator_window.check_exit_state()
         return simulator_window.read_switch(self.index)
 
     def wait_for_value(self, value: int):
         if value == 0 or value == 1:
             while True:
+
+                simulator_window.check_exit_state()
+
                 if self.read() == value:
                     break
                 else:
@@ -308,6 +306,9 @@ class LedMatrix:
         :param b: int, blue amount (0-255)
         :return: None
         """
+
+        simulator_window.check_exit_state()
+
         rgb = [r, g, b]
         # We can't let the user light up LEDs that don't exist
         if not (0 <= x < MATRIX_WIDTH and 0 <= y < MATRIX_HEIGHT):
@@ -337,6 +338,8 @@ class LedMatrix:
     def clear(self):
         """ Clear the led matrix, make all the leds black"""
 
+        simulator_window.check_exit_state()
+
         for i in range(MATRIX_WIDTH):
             for j in range(MATRIX_HEIGHT):
                 self.matrix[i][j] = [0, 0, 0]
@@ -347,6 +350,9 @@ class LedMatrix:
 
     def read_sensor(self):
         """ Read the light sensor. In led matrix class due to reasons"""
+
+        simulator_window.check_exit_state()
+
         simulator_window.slider_canvas.update()
         return simulator_window.sliders[0].get()
 
