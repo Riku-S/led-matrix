@@ -3,12 +3,12 @@ import setuptools
 with open("README.md", 'r') as f:
     long_description = f.read()
 
-with open("requirements.txt", 'r') as f:
+with open("requires.txt", 'r') as f:
     requires = f.read().split()
 
 setuptools.setup(
     name='pynq_emulator',
-    version='1.6',
+    version='1.7',
     author='Riku Salminen',
     author_email='riku.salminen@tuni.fi',
     description="An emulator for TUNI students' PYNQ exercises",
