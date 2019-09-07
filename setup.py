@@ -8,7 +8,7 @@ with open("requirements.txt", 'r') as f:
 
 setuptools.setup(
     name='pynq_emulator',
-    version='1.3',
+    version='1.4',
     author='Riku Salminen',
     author_email='riku.salminen@tuni.fi',
     description="An emulator for TUNI students' PYNQ exercises",
@@ -19,7 +19,6 @@ setuptools.setup(
 	
     classifiers = [
                   'Programming Language :: Python :: 3',
-                  'Programming Language :: Python :: 3.5',
                   'Programming Language :: Python :: 3.6',
                   'Programming Language :: Python :: 3.7',
               ],
