@@ -8,14 +8,14 @@ with open("requirements.txt", 'r') as f:
 
 setuptools.setup(
     name='pynq_emulator',
-    version='1.7',
+    version='1.8',
     author='Riku Salminen',
     author_email='riku.salminen@tuni.fi',
     description="An emulator for TUNI students' PYNQ exercises",
     packages=setuptools.find_packages(),
     scripts=[],
     url="https://github.com/Riku-S/led-matrix",
-    download_url="https://github.com/Riku-S/led-matrix/archive/master.zip",
+    download_url="https://github.com/Riku-S/led-matrix/archive/master.tar.gz",
     install_requires=requires,
     classifiers = [
                   'Programming Language :: Python :: 2.7',
