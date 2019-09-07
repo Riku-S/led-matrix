@@ -12,7 +12,7 @@ setup(
     packages=setuptools.find_packages(),
     scripts=[],
     url="https://github.com/Riku-S/led-matrix",
-    download_url="https://github.com/Riku-S/led-matrix",
+    download_url="https://github.com/Riku-S/led-matrix.git",
 	
     classifiers = [
                   'Programming Language :: Python :: 3',
