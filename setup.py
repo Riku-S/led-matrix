@@ -1,23 +1,20 @@
-from setuptools import setup, find_packages
-from codecs import open
-from os import path
+import setuptools
 
-here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+with open('README.md', 'r') as f:
     long_description = f.read()
 
-with open(path.join(here, 'requirements.txt'), encoding='utf-8') as f:
+with open('requirements.txt', 'r') as f:
     requires = f.read().split()
 
-setup(
+setuptools.setup(
     name='pynq_emulator',
-    version='1.9',
+    version='1.10',
     author='Riku Salminen',
     author_email='riku.salminen@tuni.fi',
     description="An emulator for TUNI students' PYNQ exercises",
 	long_description = long_description,
-    packages=find_packages(exclude=[]),
+    packages=setuptools.find_packages(exclude=[]),
     scripts=[],
     url="https://github.com/Riku-S/led-matrix",
     download_url="https://github.com/Riku-S/led-matrix/archive/master.tar.gz",
