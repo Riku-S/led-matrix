@@ -6,7 +6,7 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
     name='pynq_emulator',
-    version='1.15',
+    version='2.0',
     author='Riku Salminen',
     author_email='riku.salminen@tuni.fi',
     description="An emulator for TUNI students' PYNQ exercises",
@@ -26,7 +26,4 @@ setuptools.setup(
                    'Programming Language :: Python :: 3.6',
                    'Programming Language :: Python :: 3.7',
 				   ],
-	entry_points="""
-	# -*- Entry points: -*-
-    """,
 )
