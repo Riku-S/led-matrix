@@ -73,7 +73,7 @@ div {
 			To get started, create a new project in PyCharm. Find <i>Terminal</i> from the menu in the bottom left of the window and click it to open the PyCharm terminal. 
 			Execute command <code>pip install pynq-emulator</code> in the terminal to download the PYNQ emulator module.<br>
 			<br>
-			Import the contents in your code by writing <code>from pynq_emulator.pynq_emulation_library import *</code>, but remember that in the final product
+			Import the contents in your code by writing <code>from pynq_emulator.emulation import *</code>, but remember that in the final product
 			with an actual hardware, the import commands you should use are 
 			<code>import tut.arduino_led_matrix as led_matrix</code>,
 			<code>from pynq.lib import Button</code> and
@@ -105,7 +105,7 @@ div {
 			Päästäksesi alkuun, aloita uusi projekti PyCharmissa. Etsi <i>Terminal</i> ikkunan alhaalla vasemmalla olevasta valikosta ja avaa terminaali painamalla sitä.
 			Suorita terminaalissa komento <code>pip install pynq-emulator</code><br> ladataksesi PYNQ-emulaattorin moduulin.<br>
 			<br>
-			Importtaa moduulin sisältö koodissa kirjoittamalla <code>from pynq_emulator.pynq_emulation_library import *</code>, mutta muista, että lopullisessa tuotteesssa
+			Importtaa moduulin sisältö koodissa kirjoittamalla <code>from pynq_emulator.emulation import *</code>, mutta muista, että lopullisessa tuotteesssa
 			oikealla laitteella, import-komentoihin kuuluu 
 			<code>import tut.arduino_led_matrix as led_matrix</code>,
 			<code>from pynq.lib import Button</code> ja 
@@ -165,7 +165,7 @@ if my_button.read(1):
 		<code style=" white-space: pre-wrap; display: block;"># PYNQ led matrix simulator example
 
 # Remember not to import this in your final product
-from pynq_emulator.pynq_emulation_library import *
+from pynq_emulator.emulation import *
 
 # These could be imported instead
 # import tut.arduino_led_matrix as led_matrix
