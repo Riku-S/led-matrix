@@ -6,7 +6,7 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
     name='pynq_emulator',
-    version='1.13',
+    version='1.14',
     author='Riku Salminen',
     author_email='riku.salminen@tuni.fi',
     description="An emulator for TUNI students' PYNQ exercises",
@@ -18,6 +18,7 @@ setuptools.setup(
     url="https://github.com/Riku-S/led-matrix",
     download_url="https://github.com/Riku-S/led-matrix/archive/master.tar.gz",
     install_requires=[],
+    zip_safe=True,
     classifiers = ["Natural Language :: English",
 				   'Programming Language :: Python :: 2',
                    'Programming Language :: Python :: 2.7',
