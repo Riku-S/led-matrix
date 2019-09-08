@@ -71,7 +71,10 @@ div {
 		<div>
 			<b>Note: The following instructions assume you use PyCharm, since it's the coding IDE used by most of TUNI students.</b><br>
 			To get started, create a new project in PyCharm. Open <i>Terminal</i> tab from the menu in the bottom left of the window. 
-			Execute command <code>pip install pynq-emulator</code> in the terminal to download the pynq-emulator module.<br>
+			Execute command <code>pip install pynq-emulator</code> in the terminal to download and install the pynq-emulator package. <br>
+			<br>
+			Downloading packages with PyCharm is not the only way thoough, so if you use another IDE or want a better long term way 
+			to dowloading packages, learn about downloading packages with pip: <a href="https://packaging.python.org/tutorials/installing-packages/">Installing Packages --- Python Packaging User Guide</a><br>
 			<br>
 			Import the contents in your code by writing <code>from pynq_emulator.emulation import *</code>, but remember that in the final product
 			with an actual hardware, the import commands you should use are 
@@ -82,6 +85,10 @@ div {
 		</div>
 		<h3>2.2. Commands and variables you may need:</h3>
 		<div>
+			<code>pip install pynq-emulator</code><br> Run the command in your coding environment's terminal, CMD, or another command prompt to download the emulator package. 
+			<br>
+			<code>from pynq_emulator.emulation import *</code><br> Use the library in your python file.
+			<br>
 			<code>led_matrix.clear()</code> Set all the LEDs dark.<br>
 			<code>led_matrix.init()</code> Always start your simulation with this!<br>
 			<code>led_matrix.read_sensor()</code> Read the light sensor's value. In the simulation you can adjust it between 0 and 20000.<br>
@@ -103,7 +110,10 @@ div {
 		<div>
 			<b>Huomio: Seuraavassa osiossa oletetaan, että käytät PyCharmia, sillä suurin osa TUNI:n opiskelijoista käyttää sitä tehtävien tekoon.</b><br>
 			Päästäksesi alkuun, aloita uusi projekti PyCharmissa. Avaa <i>Terminal</i> välilehti ikkunan alhaalla vasemmalla olevasta valikosta.
-			Suorita terminaalissa komento <code>pip install pynq-emulator</code><br> ladataksesi pynq-emulaator moduulin.<br>
+			Suorita terminaalissa komento <code>pip install pynq-emulator</code><br> ladataksesi pynq-emulaator-kirjaston.<br>
+			<br>
+			Paketteja voi ladata muutenkin, kuin PyCharmin kautta, joten jos käytät toista ohjelmaa, tai haluat pidemmän päälle paremman ratkaisun 
+			ladata paketteja, lue pakettien lataamisesta pip:illä: <a href="https://packaging.python.org/tutorials/installing-packages/">Installing Packages --- Python Packaging User Guide</a><br>
 			<br>
 			Importtaa moduulin sisältö koodissa kirjoittamalla <code>from pynq_emulator.emulation import *</code>, mutta muista, että lopullisessa tuotteesssa
 			oikealla laitteella, import-komentoihin kuuluu 
@@ -114,6 +124,10 @@ div {
 		</div>
 		<h3>2.2. Komentoja joita voit tarvita:</h3>
 		<div>
+			<code>pip install pynq-emulator</code><br> Ohjhelmointiympäristön terminaalissa, CMD:ssä tai muussa komentotulkissa suoritettava komento, jolla voi ladata emulaattori-paketin. 
+			<br>
+			<code>from pynq_emulator.emulation import *</code><br> Ota kirjasto käyttöön python-tiedostossa.
+			<br>
 			<code>led_matrix.clear()</code> Pimennä kaikki ledit.<br>
 			<code>led_matrix.init()</code> Aloita simulaatio aina tällä komennolla!<br>
 			<code>led_matrix.read_sensor()</code> Lue valosensorin arvo. Simulaatiossa voi säädellä sitä 0-20000 välillä.<br>
