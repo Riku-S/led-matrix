@@ -1,7 +1,7 @@
 # PYNQ led matrix simulator example
 
 # Remember not to import this in your final product
-from pynq_emulator.pynq_emulation_library import *
+from pynq_emulator.emulation import *
 
 # These could be imported instead
 # import tut.arduino_led_matrix as led_matrix
