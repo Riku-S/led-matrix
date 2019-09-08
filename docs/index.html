@@ -25,7 +25,7 @@ div {
 		<div>
 			1. What is PYNQ emulator<br>
 			2. How to use<br>
-			2.1. Get Started<br>
+			2.1. Download the library and get started<br>
 			2.2. Commands you may need<br>
 			3. Known problems<br>
 			4. Example code
@@ -36,7 +36,7 @@ div {
 		<div>
 			1. Mikä on PYNQ-emulaattori<br>
 			2. Käyttöohje<br>
-			2.1. Aloitus<br>
+			2.1. Kirjaston lataaminen ja aloitus<br>
 			2.2. Komentoja joita voit tarvita<br>
 			3. Tunnetut ongelmat<br>
 			4. Esimerkkikoodi
@@ -67,18 +67,18 @@ div {
 	
 	<label lang="English">
 		<h2>2. How to use</h2>
-		<h3>2.1. Get started:</h3>
+		<h3>2.1. Download the library and get started:</h3>
 		<div>
 			<b>Note: The following instructions assume you use PyCharm, since it's the coding IDE used by most of TUNI students.</b><br>
-			To get started, create a new project in PyCharm. Find <i>Terminal</i> from the menu in the bottom left of the window and click it to open the PyCharm terminal. 
-			Execute command <code>pip install pynq-emulator</code> in the terminal to download the PYNQ emulator module.<br>
+			To get started, create a new project in PyCharm. Open <i>Terminal</i> tab from the menu in the bottom left of the window. 
+			Execute command <code>pip install pynq-emulator</code> in the terminal to download the pynq-emulator module.<br>
 			<br>
 			Import the contents in your code by writing <code>from pynq_emulator.emulation import *</code>, but remember that in the final product
 			with an actual hardware, the import commands you should use are 
 			<code>import tut.arduino_led_matrix as led_matrix</code>,
 			<code>from pynq.lib import Button</code> and
 			<code>from pynq.lib import Switch</code> <br>
-			You can write your own code as you would write it for PYNQ, or modify <i>example.py</i> (the example code in the end of this document) to get started. Run your code to see if everything works. Close the simulation from your coding IDE rather than by closing the window.
+			You can write your own code as you would write it for PYNQ, or modify the example code in the end of this document, to get started. Run your code to see if everything works. Close the simulation from your coding IDE rather than by closing the window.
 		</div>
 		<h3>2.2. Commands and variables you may need:</h3>
 		<div>
@@ -99,18 +99,18 @@ div {
 	
 	<label lang="Finnish">
 		<h2>2. Käyttöohje</h2>
-		<h3>2.1. Aloitus:</h3>
+		<h3>2.1. Kirjaston lataaminen ja aloitus:</h3>
 		<div>
 			<b>Huomio: Seuraavassa osiossa oletetaan, että käytät PyCharmia, sillä suurin osa TUNI:n opiskelijoista käyttää sitä tehtävien tekoon.</b><br>
-			Päästäksesi alkuun, aloita uusi projekti PyCharmissa. Etsi <i>Terminal</i> ikkunan alhaalla vasemmalla olevasta valikosta ja avaa terminaali painamalla sitä.
-			Suorita terminaalissa komento <code>pip install pynq-emulator</code><br> ladataksesi PYNQ-emulaattorin moduulin.<br>
+			Päästäksesi alkuun, aloita uusi projekti PyCharmissa. Avaa <i>Terminal</i> välilehti ikkunan alhaalla vasemmalla olevasta valikosta.
+			Suorita terminaalissa komento <code>pip install pynq-emulator</code><br> ladataksesi pynq-emulaator moduulin.<br>
 			<br>
 			Importtaa moduulin sisältö koodissa kirjoittamalla <code>from pynq_emulator.emulation import *</code>, mutta muista, että lopullisessa tuotteesssa
 			oikealla laitteella, import-komentoihin kuuluu 
 			<code>import tut.arduino_led_matrix as led_matrix</code>,
 			<code>from pynq.lib import Button</code> ja 
 			<code>from pynq.lib import Switch</code> <br>
-			Voit kirjoittaa koodia niinkuin kirjoittaisit sitä PYNQ:ille, tai muokata <i>example.py</i> -esimerkkiä (esimerkkikoodi dokumentaation lopussa) päästäksesi alkuun. Aja koodisi nähdäksesi, että kaikki toimii. Sulje simulaatio mieluiten PyCharmin punaisesta neliöstä.
+			Voit kirjoittaa koodia niinkuin kirjoittaisit sitä PYNQ:ille, tai muokata esimerkkikoodia dokumentaation lopussa, päästäksesi alkuun. Aja koodisi nähdäksesi, että kaikki toimii. Sulje simulaatio mieluiten PyCharmin punaisesta neliöstä.
 		</div>
 		<h3>2.2. Komentoja joita voit tarvita:</h3>
 		<div>
@@ -130,7 +130,7 @@ div {
 	</label>
 	
 	<label lang="English">
-		<h2>3. Known problems</h2>
+		<h2>3. Known problems:</h2>
 		<div>
 			Repeated <code>.read()</code> and <code>.wait_for_value()</code> functions aren't necessarily the most accurate possible. For example, writing <br>
 			<code style=" white-space: pre-wrap; ">
@@ -145,7 +145,7 @@ if my_button.read(1):
 		</div>
 	</label>
 		<label lang="Finnish">
-		<h2>3. Tunnetut ongelmat</h2>
+		<h2>3. Tunnetut ongelmat:</h2>
 		<div>
 			Peräkkäiset <code>.read()</code> ja <code>.wait_for_value()</code> funktiot eivät ole välttämättä tarkimpia mahdollisia. Esimerkiksi<br>
 			<code style=" white-space: pre-wrap; ">
@@ -161,7 +161,7 @@ if my_button.read(1):
 	</label>
 	
 	<label lang="Any">
-		<h2>4. example.py</h2>
+		<h2>4. example.py:</h2>
 		<code style=" white-space: pre-wrap; display: block;"># PYNQ led matrix simulator example
 
 # Remember not to import this in your final product
