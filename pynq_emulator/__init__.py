@@ -1,3 +1,3 @@
-from pynq_emulator.pynq_emulation_library import *
+from pynq_emulator.emulation import *
 
 name = "pynq_emulator"
