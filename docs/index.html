@@ -155,7 +155,9 @@ div {
 if my_button.read(1):
 	my_button.wait_for_value(0)</code> may soft lock the hardware PYNQ while it behaves in a more predictable way in the simulation.<br>
 			<br>
-			As long as I keep using tkinter, threading won't work due to breaking the drawing functions.<br>
+			Graphics can't always follow rapid changes in the led matrix.<br>
+			<br>
+			Threading, which you will probably never use with this emulator, destroys the program easily.<br>
 			<br>
 			Keep in mind that the testing process has been very shorthanded, since the programmer of the emulator doesn't own a PYNQ. The features are mainly made after the descriptions of the PYNQ-exercises. The error messages differ from the real device and may be caused by wrong reasons. For example, an earlier version of the emulator let you try to light up LEDs that wouldn't exist, without giving an error message, and continue the program, which is not the case in the real device. <br>
 			<br>
@@ -170,7 +172,9 @@ if my_button.read(1):
 if my_button.read(1):
 	my_button.wait_for_value(0)</code> voi saada PYNQ:in jumiin, vaikka simulaatio käyttäytyisi arvattavammin.<br>
 			<br>
-			Niin kauan kun käytän tkinteriä, threading tuhoaa piirtofunktiot.<br>
+			Grafiikat eivät aina pysy nopean vaihtelun perässä.<br>
+			<br>
+			Threading, mitä tuskin tulisit koskaan käyttämään pynq-emulaattorin kanssa, tuhoaa helposti ohjelman.<br>
 			<br>
 			Pidä mielessä, että ohjelman testaaminen on ollut erittäin vajaata. Ominaisuudet on suurimmalta osin tehty PYNQ-tehtävien tehtävänantojen antamien kuvauksien perusteella. Virheilmoitukset ovat erit, kuin oikealla laitteella, ja saattavat seurata vääristä asioista. Esimerkiksi emulaattorin aiempi versio antoi käyttäjän yrittää sytyttää ledin matriisin ulkopuolelta antamatta virheilmoitusta ja jatkaen ohjelman suoritusta, eroten oikeasta laitteesta.<br>
 			<br>
