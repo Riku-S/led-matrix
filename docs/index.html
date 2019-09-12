@@ -80,6 +80,8 @@ div {
 			Downloading packages with PyCharm is not the only way thoough, so if you use another IDE or want to use a better way 
 			to dowloading packages, learn about downloading packages with pip: <a href="https://packaging.python.org/tutorials/installing-packages/">Installing Packages --- Python Packaging User Guide</a><br>
 			<br>
+			The emulator requires <b>tkinter</b> to work, and it usually comes with Python, but if you don't have it, follow the instructions: <a href="https://tkdocs.com/tutorial/install.html">TkDocs - Tk Tutorial - Installing Tk</a><br>
+			<br>
 			Import the contents in your code by writing <code>from pynq_emulator.emulation import *</code>, but remember that in the final product
 			with an actual hardware, the import commands you should use are 
 			<code>import tut.arduino_led_matrix as led_matrix</code>,
@@ -118,6 +120,8 @@ div {
 			<br>
 			Paketteja voi ladata muutenkin, kuin PyCharmin kautta, joten jos käytät toista ohjelmaa, tai haluat käyttää pidemmän päälle parempaa tapaa 
 			ladata paketteja, lue pakettien lataamisesta pip:illä: <a href="https://packaging.python.org/tutorials/installing-packages/">Installing Packages --- Python Packaging User Guide</a><br>
+			<br>
+			Emulaattori tarvitsee kirjaston <b>tkinter</b> toimiakseen, ja yleensä se tulee Pythonin mukana, mutta jos se puuttuu, seuraa ohjeita: <a href="https://tkdocs.com/tutorial/install.html">TkDocs - Tk Tutorial - Installing Tk</a><br>
 			<br>
 			Importtaa moduulin sisältö koodissa kirjoittamalla <code>from pynq_emulator.emulation import *</code>, mutta muista, että lopullisessa tuotteesssa
 			oikealla laitteella, import-komentoihin kuuluu 
@@ -189,7 +193,7 @@ if my_button.read(1):
 # Remember not to import this in your final product
 from pynq_emulator.emulation import *
 
-# These could be imported instead
+# These would be imported instead. Don't import them in the emulation!
 # import tut.arduino_led_matrix as led_matrix
 # from pynq.lib import Button
 # from pynq.lib import Switch
